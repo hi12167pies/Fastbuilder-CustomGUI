@@ -1,0 +1,9 @@
+name: FastbuilderCustomGUIS
+version: 1.0
+main: pies.FastbuilderCustomGUI.Main
+depend: [ Fastbuilder ]
+commands:
+  reloadguis:
+    usage: /reloadguis
+    description: reload guis
+    permission: fbgui.reload

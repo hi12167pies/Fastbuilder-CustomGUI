@@ -1,0 +1,12 @@
+# Currently replay is not editable.
+
+# View docs: https://docs.pies.cf/fastbuilder/addon/customgui
+
+overwrite:
+  # overwite a default gui?
+  # put [none] to not overwrite
+  SETTINGS: "[none]"
+  PICKAXES: "[none]"
+  BLOCKS: "[none]"
+  MODES_SELECTOR: "[none]"
+gui: {}
