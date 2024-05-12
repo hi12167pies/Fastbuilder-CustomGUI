@@ -2,12 +2,10 @@ package pies.FastbuilderCustomGUI;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-import pies.FastbuilderAPI.EventManager.Events.PlayerScoreEvent;
-import pies.FastbuilderAPI.FastbuilderAPI;
 import pies.FastbuilderAPI.FastbuilderProvider;
 import pies.FastbuilderCustomGUI.Actions.ActionManager;
 import pies.FastbuilderCustomGUI.Actions.executable.*;
-import top.speedcubing.lib.utils.Reflections;
+import pies.FastbuilderCustomGUI.Util.Reflections;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -40,7 +38,7 @@ public class Main extends JavaPlugin {
         this.registeredGUIS.clear();
         this.handleGUIS.clear();
 
-        // reigster
+        // register
         for (String name : this.getConfig().getConfigurationSection("gui").getKeys(false)) {
             this.registeredGUIS.put(name, new CustomGUI(name, false, new BlankHolder()));
         }

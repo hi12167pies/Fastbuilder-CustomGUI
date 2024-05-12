@@ -19,7 +19,7 @@ public class StatsAction implements Action {
     public void executeAction(InventoryClickEvent event, List<String> args, String cmd) {
         if (args.get(1).equals("resetpb")) {
             Player player = (Player) event.getWhoClicked();
-            manager.setPersonalBest(player, manager.getCurrentMode(player), 0);
+            manager.setPersonalBest(player.getUniqueId(), manager.getCurrentMode(player), 0);
         } else {
             event.getWhoClicked().sendMessage("action not found: stats." + args.get(1));
         }

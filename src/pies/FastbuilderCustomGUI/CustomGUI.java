@@ -7,8 +7,9 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import pies.FastbuilderAPI.GUI;
-import top.speedcubing.lib.bukkit.inventory.ItemBuilder;
+import pies.FastbuilderCustomGUI.Util.ItemBuilder;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class CustomGUI extends GUI {
@@ -41,16 +42,27 @@ public class CustomGUI extends GUI {
 
             String[] itemSplit = item.split(":");
 
-            ItemBuilder builder = new ItemBuilder(Material.matchMaterial(itemSplit[0]));
+            Material material = Material.matchMaterial(itemSplit[0]);
+            if (material == null) {
+                player.sendMessage("Unknown material " + itemSplit[0]);
+                continue;
+            }
+            ItemBuilder builder = new ItemBuilder(material);
             builder.durability(Integer.parseInt(itemSplit[1]));
             builder.amount(amount);
 
-            if (lore != null)
-                builder.lore(lore.replace("&", "§"));
+            if (lore != null) {
+                List<String> loreList = Arrays.asList(lore.replace("&", "§").split("\\\\n"));
+                builder.lore(loreList);
+            }
             if (name != null)
                 builder.name(name.replace("&", "§"));
 
-            i.setItem(slot, builder.build());
+            i.setItem(slot, builder
+                    .hideAttr()
+                    .hidePotion()
+                    .hideEnch()
+                    .build());
         }
 
         if (Main.instance.getConfig().contains("gui." + this.name + ".fill")) {
