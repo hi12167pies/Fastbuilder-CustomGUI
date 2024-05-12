@@ -30,6 +30,7 @@ public class Main extends JavaPlugin {
         actionManager.registerAction(new BlockAction());
         actionManager.registerAction(new PickaxeAction());
         actionManager.registerAction(new StatsAction());
+        actionManager.registerAction(new OtherAction());
 
         Bukkit.getPluginManager().registerEvents(new CustomGUIHandler(), this);
         Bukkit.getPluginCommand("reloadguis").setExecutor(new ReloadGUI());
