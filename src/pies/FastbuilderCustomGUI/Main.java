@@ -1,6 +1,7 @@
 package pies.FastbuilderCustomGUI;
 
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import pies.FastbuilderAPI.FastbuilderProvider;
 import pies.FastbuilderCustomGUI.Actions.ActionManager;
@@ -67,5 +68,10 @@ public class Main extends JavaPlugin {
 
             this.handleGUIS.add(gui);
         }
+    }
+
+    public static boolean isPlaceholderAPIInstalled() {
+        Plugin placeholderAPI = Bukkit.getPluginManager().getPlugin("PlaceholderAPI");
+        return placeholderAPI != null && placeholderAPI.isEnabled();
     }
 }

@@ -1,5 +1,6 @@
 package pies.FastbuilderCustomGUI;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -11,6 +12,7 @@ import pies.FastbuilderCustomGUI.Util.ItemBuilder;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CustomGUI extends GUI {
     public boolean isBound;
@@ -52,11 +54,20 @@ public class CustomGUI extends GUI {
             builder.amount(amount);
 
             if (lore != null) {
-                List<String> loreList = Arrays.asList(lore.replace("&", "§").split("\\\\n"));
+                List<String> loreList = Arrays.asList(lore.replace("&", "§").split("\\\\n|\n"));
+                if (Main.isPlaceholderAPIInstalled()) {
+                    loreList = loreList.stream()
+                            .map(str -> PlaceholderAPI.setPlaceholders(player, str))
+                            .collect(Collectors.toList());
+                }
                 builder.lore(loreList);
             }
-            if (name != null)
+            if (name != null) {
                 builder.name(name.replace("&", "§"));
+                if (Main.isPlaceholderAPIInstalled()) {
+                    name = PlaceholderAPI.setPlaceholders(player, name);
+                }
+            }
 
             i.setItem(slot, builder
                     .hideAttr()
