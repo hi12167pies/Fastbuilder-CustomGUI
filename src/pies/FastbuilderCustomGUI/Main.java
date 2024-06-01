@@ -42,6 +42,7 @@ public class Main extends JavaPlugin {
         // register
         for (String name : this.getConfig().getConfigurationSection("gui").getKeys(false)) {
             this.registeredGUIS.put(name, new CustomGUI(name, false, new BlankHolder()));
+            System.out.println("[CustomGUI] Registered gui " + name);
         }
 
         // overwrite
@@ -52,13 +53,17 @@ public class Main extends JavaPlugin {
 
             GUI.GUIS gui;
             try {
-                gui = GUI.GUIS.valueOf(value);
+                gui = GUI.GUIS.valueOf(item);
             } catch (IllegalArgumentException e) {
+                System.out.println("[CustomGUI] Unknown gui to overwrite " + item);
                 continue;
             }
 
             CustomGUI registeredGUI = this.registeredGUIS.get(value);
-            if (registeredGUI == null) continue;
+            if (registeredGUI == null) {
+                System.out.println("[CustomGUI] Registered gui is null " + value);
+                continue;
+            }
 
             registeredGUI.isBound = true;
             gui.gui = registeredGUI;
