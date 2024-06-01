@@ -1,7 +1,7 @@
 package pies.FastbuilderCustomGUI.Actions.executable;
 
+import cf.pies.fastbuilder.api.FastbuilderPlayer;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryClickEvent;
 import pies.FastbuilderCustomGUI.Actions.Action;
 
 import java.util.List;
@@ -13,8 +13,7 @@ public class CommandAction implements Action {
     }
 
     @Override
-    public void executeAction(InventoryClickEvent event, List<String> args, String cmd) {
-        Player player = (Player) event.getWhoClicked();
-        player.performCommand(cmd.substring(4));
+    public void executeAction(FastbuilderPlayer player, List<String> args, String cmd) {
+        player.getPlayer().performCommand(cmd.substring(4));
     }
 }

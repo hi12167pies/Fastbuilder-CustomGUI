@@ -1,5 +1,6 @@
 package pies.FastbuilderCustomGUI;
 
+import cf.pies.fastbuilder.api.gui.GUI;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -7,7 +8,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
-import pies.FastbuilderAPI.GUI;
 import pies.FastbuilderCustomGUI.Util.ItemBuilder;
 
 import java.util.Arrays;

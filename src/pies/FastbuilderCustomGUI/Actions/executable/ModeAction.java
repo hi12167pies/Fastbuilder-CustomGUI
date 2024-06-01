@@ -1,38 +1,39 @@
 package pies.FastbuilderCustomGUI.Actions.executable;
 
-import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import pies.FastbuilderAPI.FBManager;
-import pies.FastbuilderAPI.FastbuilderProvider;
+import cf.pies.fastbuilder.api.FastbuilderAPI;
+import cf.pies.fastbuilder.api.FastbuilderMode;
+import cf.pies.fastbuilder.api.FastbuilderPlayer;
+import cf.pies.fastbuilder.api.FastbuilderProvider;
 import pies.FastbuilderCustomGUI.Actions.Action;
 
 import java.util.List;
 
 public class ModeAction implements Action {
-    FBManager manager = FastbuilderProvider.getApi().getManager();
+    FastbuilderAPI api = FastbuilderProvider.getApi();
+
     @Override
     public String getName() {
         return "mode";
     }
 
     @Override
-    public void executeAction(InventoryClickEvent event, List<String> args, String cmd) {
-        Player player = (Player) event.getWhoClicked();
-        String mode = args.get(1);
+    public void executeAction(FastbuilderPlayer player, List<String> args, String cmd) {
+        String sMode = args.get(1);
+        FastbuilderMode mode = FastbuilderProvider.getApi().getMode(sMode);
 
-        if (manager.getNextValidArena(mode) == null) {
-            player.sendMessage(manager.getMessage("mode_full"));
+        if (mode.nextValidArena() == null) {
+            player.getPlayer().sendMessage(api.getMessage("mode_full"));
+                return;
+            }
+        if (player.isWatchingReplay()) {
+            player.getPlayer().sendMessage(api.getMessage("cannot_change_mode_in_replay"));
             return;
         }
-        if (manager.isReplayExist(player) && manager.isWatchingReplay(player)) {
-            player.sendMessage(manager.getMessage("cannot_change_mode_in_replay"));
+        if (mode.equals(player.getMode())) {
+            player.getPlayer().sendMessage(api.getMessage("already_in_mode"));
             return;
         }
-        if (mode.equals(manager.getCurrentMode(player))) {
-            player.sendMessage(manager.getMessage("already_in_mode"));
-            return;
-        }
-        manager.leave(player, true, false, false);
-        manager.join(player, mode);
+        player.leave(true, true);
+        player.join(mode);
     }
 }

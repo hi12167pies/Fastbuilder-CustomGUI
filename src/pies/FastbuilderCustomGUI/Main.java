@@ -1,12 +1,11 @@
 package pies.FastbuilderCustomGUI;
 
+import cf.pies.fastbuilder.api.gui.GUI;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import pies.FastbuilderAPI.FastbuilderProvider;
 import pies.FastbuilderCustomGUI.Actions.ActionManager;
 import pies.FastbuilderCustomGUI.Actions.executable.*;
-import pies.FastbuilderCustomGUI.Util.Reflections;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -51,14 +50,18 @@ public class Main extends JavaPlugin {
 
             if (value.equals("[none]")) continue;
 
-            Enum<?> gui = FastbuilderProvider.getApi().getETC().a(item);
-            if (gui == null) continue;
+            GUI.GUIS gui;
+            try {
+                gui = GUI.GUIS.valueOf(value);
+            } catch (IllegalArgumentException e) {
+                continue;
+            }
 
             CustomGUI registeredGUI = this.registeredGUIS.get(value);
             if (registeredGUI == null) continue;
 
             registeredGUI.isBound = true;
-            Reflections.setField(gui, "gui", registeredGUI);
+            gui.gui = registeredGUI;
         }
 
         // finalize

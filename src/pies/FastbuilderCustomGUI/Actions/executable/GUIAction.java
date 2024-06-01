@@ -1,10 +1,8 @@
 package pies.FastbuilderCustomGUI.Actions.executable;
 
-import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import pies.FastbuilderAPI.GUI;
+import cf.pies.fastbuilder.api.FastbuilderPlayer;
+import cf.pies.fastbuilder.api.gui.GUI;
 import pies.FastbuilderCustomGUI.Actions.Action;
-import pies.FastbuilderCustomGUI.CustomGUI;
 import pies.FastbuilderCustomGUI.CustomGUIHandler;
 import pies.FastbuilderCustomGUI.Main;
 
@@ -17,12 +15,12 @@ public class GUIAction implements Action {
     }
 
     @Override
-    public void executeAction(InventoryClickEvent event, List<String> args, String cmd) {
-        Player player = (Player) event.getWhoClicked();
+    public void executeAction(FastbuilderPlayer player, List<String> args, String cmd) {
         if (args.get(1).equalsIgnoreCase("close")) {
-            player.closeInventory();
+            player.getPlayer().closeInventory();
             return;
         }
+
         GUI gui = Main.instance.registeredGUIS.get(args.get(1));
         if (gui == null) {
             try {
@@ -30,10 +28,10 @@ public class GUIAction implements Action {
             } catch (Exception ignored) {}
 
             if (gui == null) {
-                player.sendMessage("GUI Not found: " + args.get(1));
+                player.getPlayer().sendMessage("GUI Not found: " + args.get(1));
                 return;
             }
         }
-        CustomGUIHandler.open(player, gui);
+        CustomGUIHandler.open(player.getPlayer(), gui);
     }
 }

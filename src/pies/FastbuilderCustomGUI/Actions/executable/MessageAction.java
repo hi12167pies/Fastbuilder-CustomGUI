@@ -1,5 +1,6 @@
 package pies.FastbuilderCustomGUI.Actions.executable;
 
+import cf.pies.fastbuilder.api.FastbuilderPlayer;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import pies.FastbuilderCustomGUI.Actions.Action;
 
@@ -12,7 +13,7 @@ public class MessageAction implements Action {
     }
 
     @Override
-    public void executeAction(InventoryClickEvent event, List<String> args, String cmd) {
-        event.getWhoClicked().sendMessage(cmd.substring(4).replace("&", "§"));
+    public void executeAction(FastbuilderPlayer player, List<String> args, String cmd) {
+        player.getPlayer().sendMessage(cmd.substring(4).replace("&", "§"));
     }
 }

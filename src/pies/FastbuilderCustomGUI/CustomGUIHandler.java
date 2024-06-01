@@ -1,10 +1,10 @@
 package pies.FastbuilderCustomGUI;
 
+import cf.pies.fastbuilder.api.gui.GUI;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import pies.FastbuilderAPI.GUI;
 
 public class CustomGUIHandler implements Listener {
 

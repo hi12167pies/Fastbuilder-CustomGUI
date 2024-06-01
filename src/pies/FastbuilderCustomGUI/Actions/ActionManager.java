@@ -1,5 +1,8 @@
 package pies.FastbuilderCustomGUI.Actions;
 
+import cf.pies.fastbuilder.api.FastbuilderPlayer;
+import cf.pies.fastbuilder.api.FastbuilderProvider;
+import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 import java.util.Arrays;
@@ -23,8 +26,9 @@ public class ActionManager {
 
     public void run(String action, InventoryClickEvent event) {
         List<String> args = Arrays.asList(action.split("\\."));
-        Action a = this.actions.get(args.get(0));
-        if (a == null) return;
-        a.executeAction(event, args, action);
+        Action act = this.actions.get(args.get(0));
+        if (act == null) return;
+        Player player = (Player) event.getWhoClicked();
+        act.executeAction(FastbuilderProvider.getApi().getPlayer(player), args, action);
     }
 }
