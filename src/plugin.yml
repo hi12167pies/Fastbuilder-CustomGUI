@@ -1,4 +1,4 @@
-name: FastbuilderCustomGUIS
+name: Fastbuilder-CustomGUI
 version: 1.0
 main: pies.FastbuilderCustomGUI.Main
 depend: [ Fastbuilder ]
