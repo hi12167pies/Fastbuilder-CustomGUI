@@ -1,7 +1,5 @@
 package pies.FastbuilderCustomGUI.Util;
 
-import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.properties.Property;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -13,7 +11,6 @@ import org.bukkit.potion.PotionEffect;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
 public class ItemBuilder {
     ItemStack itemStack;

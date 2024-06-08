@@ -1,7 +1,6 @@
 package pies.FastbuilderCustomGUI.Actions.executable;
 
 import cf.pies.fastbuilder.api.FastbuilderPlayer;
-import org.bukkit.event.inventory.InventoryClickEvent;
 import pies.FastbuilderCustomGUI.Actions.Action;
 
 import java.util.List;
